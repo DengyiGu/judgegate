@@ -1,0 +1,10 @@
+include LICENSE README.md pyproject.toml
+recursive-include src *.py
+recursive-include tests *.py
+recursive-include experiments *.py *.json
+recursive-include examples *.py
+recursive-include docs *.md *.json
+exclude docs/HANDOFF.md
+prune data
+prune reports
+prune work

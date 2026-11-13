@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "judgegate"
+version = "0.1.0"
+description = "Label-efficient regression gates for ranking systems using an LLM judge and a few human labels"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Dengyi Gu"}]
+keywords = ["retrieval", "evaluation", "llm-judge", "prediction-powered-inference", "active-sampling"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = ["numpy>=1.26"]
+
+[project.optional-dependencies]
+judge = ["torch>=2.6", "transformers>=4.56"]
+experiments = [
+  "torch>=2.6",
+  "transformers>=4.56",
+  "sentence-transformers>=3",
+  "scikit-learn>=1.5",
+  "scipy>=1.11",
+  "huggingface_hub>=0.25",
+  "truststore>=0.10",
+]
+dev = ["pytest>=8", "ruff>=0.9"]
+
+[project.urls]
+Homepage = "https://github.com/DengyiGu/judgegate"
+Issues = "https://github.com/DengyiGu/judgegate/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

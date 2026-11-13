@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-13",
+  "development_tests": {
+    "passed": 32,
+    "skipped": 0
+  },
+  "clean_wheel_tests": {
+    "passed": 30,
+    "skipped": 2,
+    "skip_reason": "optional retrieval-regression cross-checks not installed"
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "quickstart": "passed in development and clean wheel environments",
+  "build": "sdist and wheel built successfully",
+  "archive_audit": "no local instruction or continuation files",
+  "repetitions": 50,
+  "clean_environment": {
+    "python": "3.11.3",
+    "numpy": "2.4.6",
+    "pytest": "9.2.0"
+  }
+}
