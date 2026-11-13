@@ -17,3 +17,18 @@ jobs:
       - run: python -m ruff format --check .
       - run: python -m pytest -q
       - run: python examples/quickstart.py
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: DengyiGu/retrieval-regression
+          ref: 8707649dfa41f377fb6b09e2566be40035b2e5e2
+          path: work/retrieval-regression
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e ".[dev]" -e ./work/retrieval-regression
+      - run: python -m pytest tests/test_joint_evaluation.py -q
+      - run: python examples/joint_evaluation.py

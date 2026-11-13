@@ -1,0 +1,77 @@
+{
+  "records": [
+    {
+      "metric": "precision@10",
+      "query_count": 323,
+      "max_drop": 0.02,
+      "reference": {
+        "baseline": 0.2563467492260062,
+        "candidate": 0.20371517027863775,
+        "delta": -0.052631578947368446,
+        "decision": "fail"
+      },
+      "sequential": {
+        "decision": "fail",
+        "alpha": 0.05,
+        "labels": 325,
+        "nonzero_weight_items": 3698,
+        "label_share": 0.08788534342888048,
+        "predictor": "learned-human-mean",
+        "agrees_with_reference": true
+      },
+      "label_source": "qrels replay; unjudged documents score zero",
+      "data_kind": "public-data replay",
+      "dataset": "nfcorpus test",
+      "baseline_system": "bge",
+      "candidate_system": "bge-binary"
+    },
+    {
+      "metric": "precision@10",
+      "query_count": 323,
+      "max_drop": 0.02,
+      "reference": {
+        "baseline": 0.2563467492260062,
+        "candidate": 0.20371517027863775,
+        "delta": -0.052631578947368446,
+        "decision": "fail"
+      },
+      "sequential": {
+        "decision": "fail",
+        "alpha": 0.05,
+        "labels": 325,
+        "nonzero_weight_items": 3698,
+        "label_share": 0.08788534342888048,
+        "predictor": "recalibrated-judge",
+        "agrees_with_reference": true
+      },
+      "label_source": "qrels replay; unjudged documents score zero",
+      "data_kind": "public-data replay",
+      "dataset": "nfcorpus test",
+      "baseline_system": "bge",
+      "candidate_system": "bge-binary"
+    }
+  ],
+  "versions": {
+    "judgegate": "0.1.0",
+    "retrieval-regression": "0.4.0"
+  },
+  "retrieval_regression_commit": "8707649dfa41f377fb6b09e2566be40035b2e5e2",
+  "settings": {
+    "seed": 0,
+    "batch_size": 25,
+    "alpha": 0.05,
+    "k": 10,
+    "max_drop": 0.02
+  },
+  "validation": {
+    "development_tests_passed": 34,
+    "joint_tests_passed": 2
+  },
+  "sha256": {
+    "examples/joint_evaluation.py": "bfa3f73fece4ba2472b01e8af885d9f6c1821e2a2544fdc85ec060c7c9a108cf",
+    "reports/runs/nfcorpus/bge.trec": "adf9322d941eb77352b28dc0e4564f0e2f90f80b92ee02aec158a7a554dc9729",
+    "reports/runs/nfcorpus/bge-binary.trec": "0790d9e981d35132d69d4ef624f9e5975d3fe1597146479540a3239340e07e50",
+    "reports/judgments/nfcorpus.jsonl": "3f02ed194e12844602bb39dd6983fe1b3e94e1dd3126196db69af132dd4521c5",
+    "data/nfcorpus.zip": "efe5be03f8c5b86a5870102d0599d227c8c6e2484328e68c6522560385671b0b"
+  }
+}

@@ -62,7 +62,20 @@ Linux/macOS:
 The quickstart is fully synthetic, offline and needs no model. Runtime-only installation is
 `python -m pip install .`. Tests optionally cross-check file formats and precision against
 [retrieval-regression](https://github.com/DengyiGu/retrieval-regression); those two tests skip
-when that separate package is not installed.
+when that separate package is not installed. The joint-example tests also skip without it.
+
+## Companion project: Retrieval Regression
+
+[Retrieval Regression](https://github.com/DengyiGu/retrieval-regression) evaluates complete
+qrels, compares retrieval runs, and produces quality gates and offline reports. JudgeGate
+uses sequential sampling to reduce the labels needed for a decision on a fixed test set.
+Both remain independently installable; neither core requires the other.
+
+The [joint example](docs/INTEGRATION.md) uses both tools on the same Precision@K target:
+complete-qrels reference first, then simulated label requests with optional cached LLM
+predictions. It includes an offline demo and a measured NFCorpus replay. This complements
+Retrieval Regression's query-bootstrap gates, whose uncertainty concerns query sampling;
+JudgeGate's uncertainty concerns which document labels were requested on fixed queries.
 
 ## Use your own annotator
 
