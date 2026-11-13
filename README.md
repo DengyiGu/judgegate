@@ -117,6 +117,22 @@ fixed test set. Repeated releases, metrics and slices need a multiple-testing po
 Printed bounds are one-sided 1-alpha bounds (jointly at least 1-2*alpha).
 See the [estimator, stopping argument and assumptions](docs/METHOD.md).
 
+## Model compatibility
+
+The built-in local judge has been tested with **Qwen3-4B-Instruct-2507**. To use another
+model, it needs:
+
+- Transformers `AutoModelForCausalLM` loading with `trust_remote_code=False` and a tokenizer
+  with a chat template.
+- Each grade digit `0`, `1` and `2` encoded as a single token.
+- A base model that returns `last_hidden_state` and an output embedding layer that maps it
+  to vocabulary logits, as used by [the scorer](src/judgegate/judge.py).
+
+Other models need a compatibility check; remote chat APIs are not wired into this scorer.
+Change `models.judge.id` and `revision` in `experiments/config.json` and start a fresh
+judgments cache when replacing the model. Weights are downloaded locally, not bundled with
+the repository. The core statistical methods and human-only gate need no language model.
+
 ## Reproduce the public-data experiment
 
 Install `.[experiments]` in an environment with an appropriate PyTorch build. The recorded
