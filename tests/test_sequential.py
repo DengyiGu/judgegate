@@ -174,3 +174,45 @@ def test_interactive_gate():
             predictor,
             max_drop=-1,
         )
+
+
+def test_reported_bounds_agree_with_the_decision():
+    rng = np.random.default_rng(1)
+    low_miss = high_miss = 0
+    trials = 150
+    for trial in range(trials):
+        n = int(rng.integers(200, 1500))
+        weights = rng.choice([-1.0, 1.0], size=n) * rng.uniform(0.2, 1.0, size=n) / n
+        shift = rng.uniform(-0.15, 0.15)
+        chance = np.where(weights > 0, 0.4 + shift, 0.4 - shift)
+        gains = (rng.uniform(size=n) < chance).astype(float)
+        truth = float(np.sum(weights * gains))
+        max_drop = float(rng.choice([0.0, 0.01, 0.02, 0.05]))
+        result = run_gate(weights, lambda i, g=gains: g[i], max_drop=max_drop, seed=trial)
+        if result.decision == "pass":
+            assert result.low >= -max_drop
+        else:
+            assert result.decision == "fail" and result.high <= -max_drop
+        assert result.low <= result.high + 1e-12
+        low_miss += result.low > truth + 1e-12
+        high_miss += result.high < truth - 1e-12
+    assert low_miss / trials <= 0.1 and high_miss / trials <= 0.1
+
+
+def test_bounds_anchored_at_a_threshold_cover_at_the_stated_rate():
+    weights, gains, judge = scenario(0.04, seed=8, n=900)
+    truth = float(np.sum(weights * gains))
+    probs = sampling_probabilities(weights)
+    predictor = Predictor.from_judge(judge, [0.0, 1.0], weights)
+    rng = np.random.default_rng(21)
+    runs = 300
+    for threshold in (truth + 0.02, truth - 0.02):
+        low_miss = high_miss = 0
+        for _ in range(runs):
+            order = labeling_order(probs, rng)[:200]
+            low, high = bounds(
+                weights, probs, order, gains[order], predictor, alpha=0.1, threshold=threshold
+            )
+            low_miss += low > truth + 1e-12
+            high_miss += high < truth - 1e-12
+        assert low_miss / runs <= 0.1 and high_miss / runs <= 0.1

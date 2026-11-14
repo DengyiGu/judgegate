@@ -114,7 +114,8 @@ zero. Score ties break by ascending document ID.
 For one fixed gate with correctly sampled labels, a wrong decision has probability at most
 alpha under the method's assumptions. The guarantee is over the sampling order on this
 fixed test set. Repeated releases, metrics and slices need a multiple-testing policy.
-Printed bounds are one-sided 1-alpha bounds (jointly at least 1-2*alpha).
+Printed bounds are one-sided 1-alpha bounds (jointly at least 1-2*alpha) and always agree
+with the decision: a pass has `low >= -max_drop`, a fail has `high <= -max_drop`.
 See the [estimator, stopping argument and assumptions](docs/METHOD.md).
 
 ## Model compatibility
@@ -150,6 +151,7 @@ retrieval and judging stages resume from local artifacts. Simulation always reru
 ```console
 python -m experiments.simulate --repetitions 50
 python -m experiments.tables
+python -m experiments.recheck
 python -m experiments.evidence
 ```
 
@@ -164,6 +166,7 @@ so regenerate publication tables only after the intended run.
 - `src/judgegate/`: metrics, unbiased correction, sequential tests, local judge and TREC writers.
 - `experiments/`: retrieval systems, judging, simulation and evidence generation.
 - `examples/quickstart.py`: complete offline example.
+- `examples/joint_evaluation.py`: the same decision checked against Retrieval Regression.
 - `tests/`: hand calculations, exact conditional-expectation checks and sampling simulations.
 - `docs/`: method and measured evidence.
 

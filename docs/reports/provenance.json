@@ -17,16 +17,17 @@
     "src/judgegate/agreement.py": "c97edc7c335a7d5a1a8b9076ae2d6274cb015dc5f57af36eab87679b4c73e9a5",
     "src/judgegate/estimators.py": "c4ef4ec5d7fa59c2346a33ddba90c633f676f9ea25d8ffa95fa55db18a9ed462",
     "src/judgegate/files.py": "8a6ed8c0a67d1c2a0a734283aa2e75d249526b50b7762f29c7231c17610e0a3c",
-    "src/judgegate/judge.py": "4b1f67a9dd9818373327177fe24538e0b737d52af44421d8443f5d109957d653",
+    "src/judgegate/judge.py": "7f99ab10e16f5e70b8ae782dd454cb3ae44190c5924a50626b641b01805c8f2d",
     "src/judgegate/metrics.py": "a430e125c79c03b4d875176fbf483e4047b1c6080eac4a2ae0d56b12879f4449",
-    "src/judgegate/sequential.py": "e7533c750286b02c7fe143327d7725edd68bd07e3b3a2fcc7f674f6fee153749",
+    "src/judgegate/sequential.py": "dc77521331a9adceca3e4257580967d47b31759a617e3d12be8aa9a0a0d6ab85",
     "experiments/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "experiments/build_runs.py": "e73e14e082999be86151b34c01cc07e5d1add87d2c98b073371ca593fbc5e49e",
     "experiments/data.py": "94d4f2872a158eb31e75d5bebcfaa7211c2c796da942e12431f5874a884fdcc6",
     "experiments/evidence.py": "3c0d3ce3598469dd915d0052c5d52f873521d5d640843adcd3eb8a5f86f1c4d0",
-    "experiments/run.py": "42cc8d5093dab055664097dd3412e45d6ef12d97e60b44d176d22059db53328b",
+    "experiments/recheck.py": "bee154a4274552dfd394ccf7f73614c2c706c6b231e8a9fca8cacbe5782053ce",
+    "experiments/run.py": "541486196b1b13806707777622c62b0e1d7ec16a0b2201a12242a23bc39225ba",
     "experiments/run_judge.py": "8bf972c17152f731a7bf032424512a396aa4c312060127f5852f080e8a1d31b9",
-    "experiments/simulate.py": "52b92670cd9eb52dba5a789a39656a160ad2d8d67788aed118b23c0b4058c12d",
+    "experiments/simulate.py": "caafb12bce3bcdc7b649fdff091059f6d99d47f5c3d994fa32e9b7e9cb74599a",
     "experiments/systems.py": "ccd42d6e0fec8363b74142eb7d075b0fc17c8478b2fd16fbbc4452424d12bd94",
     "experiments/tables.py": "20332d2f0ba959412ec51be248ccd6b85ac2745c0034782616296167c8339ca3",
     "experiments/config.json": "0254446007bf69cbbc13b4c459e03af157056a4e6d87d0f0382e594abea13e71",
@@ -46,7 +47,7 @@
     "reports/runs/trec-covid/rrf.trec": "174ee48d35fcb67e235c80ec9c6a5637518ed1a7a0c8cea4acbada7c9ec20fbe",
     "reports/judgments/nfcorpus.jsonl": "3f02ed194e12844602bb39dd6983fe1b3e94e1dd3126196db69af132dd4521c5",
     "reports/judgments/trec-covid.jsonl": "0dd3c1482612010381addf44643912c1298e6d2ac61b74d025d40ac279128ed5",
-    "reports/simulation/nfcorpus.json": "f56f329c7c9ff1952e96df7414678ca0382df51d41a586468b85bdbb930eaee9",
-    "reports/simulation/trec-covid.json": "ed6c36161c9be35e1691d260a20f3274468edbb93959411915578ec21c537705"
+    "reports/simulation/nfcorpus.json": "3fd0c4a2fcd02bb7d357340f2e8e4bcbf0565c5c31b410d86aa4baf4061dc215",
+    "reports/simulation/trec-covid.json": "e2cb19d626263c7a69bcb380db95d8a07e983c67e14cd40b2818513730f1991d"
   }
 }

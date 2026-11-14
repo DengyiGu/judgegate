@@ -103,9 +103,8 @@ class LocalJudge:
 
         Grade probabilities are renormalized over the grade digits; the raw logits are kept
         so the distributions can be rescaled later without another model pass. The digit
-        mass is the share
-        of the full next-token distribution on those digits; a low value means the model
-        wanted to say something other than a grade.
+        mass is the share of the full next-token distribution on those digits; a low value
+        means the model wanted to say something other than a grade.
         """
         torch = self.torch
         texts = [

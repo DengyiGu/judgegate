@@ -1,0 +1,231 @@
+{
+ "alpha": 0.05,
+ "max_drop": 0.02,
+ "main_study_repetitions": 50,
+ "recheck_repetitions": 500,
+ "selection": "main-study wrong-decision rate above alpha",
+ "cells": [
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "bge",
+   "candidate": "bm25",
+   "method": "human-weighted-plain",
+   "true_delta": -0.023382577235358328,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.022,
+   "recheck_standard_error": 0.006559878047646922
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "bge-trunc",
+   "candidate": "bge-binary",
+   "method": "human-weighted-plain",
+   "true_delta": -0.02186520229802397,
+   "main_study_wrong": 0.1,
+   "recheck_wrong": 0.036,
+   "recheck_standard_error": 0.008331146379700696
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "bge-trunc",
+   "candidate": "bge-binary",
+   "method": "judge-active",
+   "true_delta": -0.02186520229802397,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.026,
+   "recheck_standard_error": 0.007116740827092132
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "e5",
+   "candidate": "bm25",
+   "method": "human-weighted",
+   "true_delta": -0.013267046882503325,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.016,
+   "recheck_standard_error": 0.005611416933360059
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "rrf",
+   "candidate": "bm25",
+   "method": "judge-active",
+   "true_delta": -0.018431683285480283,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.022,
+   "recheck_standard_error": 0.006559878047646922
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "sdcg",
+   "baseline": "rrf",
+   "candidate": "bge-trunc",
+   "method": "judge-weighted-trusted",
+   "true_delta": -0.010521817214254605,
+   "main_study_wrong": 0.08,
+   "recheck_wrong": 0.024,
+   "recheck_standard_error": 0.00684455988358638
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "bge",
+   "candidate": "e5",
+   "method": "human-uniform-plain",
+   "true_delta": -0.0173374613003096,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.006,
+   "recheck_standard_error": 0.0034536936748935914
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "bge",
+   "candidate": "bm25-ce",
+   "method": "judge-active",
+   "true_delta": -0.025386996904024767,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.02,
+   "recheck_standard_error": 0.006260990336999411
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bge-trunc",
+   "method": "judge-weighted",
+   "true_delta": -0.01888544891640867,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.026,
+   "recheck_standard_error": 0.007116740827092132
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bge-trunc",
+   "method": "judge-active",
+   "true_delta": -0.01888544891640867,
+   "main_study_wrong": 0.08,
+   "recheck_wrong": 0.026,
+   "recheck_standard_error": 0.007116740827092132
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bm25-ce",
+   "method": "human-uniform-plain",
+   "true_delta": -0.019195046439628483,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.032,
+   "recheck_standard_error": 0.007870959280799261
+  },
+  {
+   "dataset": "nfcorpus",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bm25-ce",
+   "method": "judge-weighted",
+   "true_delta": -0.019195046439628483,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.028,
+   "recheck_standard_error": 0.007377804551490911
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "sdcg",
+   "baseline": "bm25",
+   "candidate": "bge-binary",
+   "method": "human-uniform-plain",
+   "true_delta": -0.03531673673733409,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.014,
+   "recheck_standard_error": 0.00525433154644813
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "bge-binary",
+   "candidate": "bm25",
+   "method": "human-uniform-plain",
+   "true_delta": 0.04800000000000001,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.014,
+   "recheck_standard_error": 0.00525433154644813
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "e5",
+   "candidate": "bm25-ce",
+   "method": "human-weighted-plain",
+   "true_delta": -0.024000000000000007,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.012,
+   "recheck_standard_error": 0.004869496893930624
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "e5",
+   "candidate": "bm25-ce",
+   "method": "judge-weighted",
+   "true_delta": -0.024000000000000007,
+   "main_study_wrong": 0.1,
+   "recheck_wrong": 0.022,
+   "recheck_standard_error": 0.006559878047646922
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "e5",
+   "candidate": "bm25-ce",
+   "method": "judge-active",
+   "true_delta": -0.024000000000000007,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.022,
+   "recheck_standard_error": 0.006559878047646922
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bge",
+   "method": "judge-active",
+   "true_delta": -0.026000000000000002,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.024,
+   "recheck_standard_error": 0.00684455988358638
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "e5",
+   "method": "human-weighted-plain",
+   "true_delta": -0.024,
+   "main_study_wrong": 0.08,
+   "recheck_wrong": 0.016,
+   "recheck_standard_error": 0.005611416933360059
+  },
+  {
+   "dataset": "trec-covid",
+   "metric": "precision",
+   "baseline": "rrf",
+   "candidate": "bm25-ce",
+   "method": "human-weighted-plain",
+   "true_delta": -0.048,
+   "main_study_wrong": 0.06,
+   "recheck_wrong": 0.014,
+   "recheck_standard_error": 0.00525433154644813
+  }
+ ],
+ "highest_recheck_wrong": 0.036,
+ "wall_seconds": 16.275286499992944
+}

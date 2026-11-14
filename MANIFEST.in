@@ -3,8 +3,8 @@ recursive-include src *.py
 recursive-include tests *.py
 recursive-include experiments *.py *.json
 recursive-include examples *.py
-recursive-include docs *.md *.json
-exclude docs/HANDOFF.md
+include docs/DATA.md docs/INTEGRATION.md docs/METHOD.md
+recursive-include docs/reports *.md *.json
 prune data
 prune reports
 prune work

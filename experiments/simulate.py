@@ -107,6 +107,27 @@ def diagnostics(qrels, runs, cache, pooled, settings, max_grade):
     return result
 
 
+def method_setup(weights, grade_probs, values, settings):
+    """Propensities and predictor of every method, plus the judge's raw mean predictions."""
+    mean, spread = predicted_gain(grade_probs, values)
+    predictors = {
+        "zero": Predictor.zero(len(weights)),
+        "none": Predictor.without_judge(weights, strength=settings["strength"]),
+        "trusted": Predictor.fixed(mean),
+        "judge": Predictor.from_judge(grade_probs, values, weights, strength=settings["strength"]),
+    }
+    setup = {}
+    for name, (scheme, kind) in METHODS.items():
+        probs = sampling_probabilities(
+            weights,
+            spread if scheme == "active" else None,
+            mix=settings["mix"],
+            uniform=scheme == "uniform",
+        )
+        setup[name] = (probs, predictors[kind])
+    return setup, mean
+
+
 def study_pair(weights, truth, grade_probs, values, settings, rng):
     """Run every method on one regression test; return per-method summaries.
 
@@ -115,21 +136,9 @@ def study_pair(weights, truth, grade_probs, values, settings, rng):
     exact = float(np.sum(weights * truth))
     correct = "pass" if exact >= -settings["max_drop"] else "fail"
     reps = settings["repetitions"]
-    mean, spread = predicted_gain(grade_probs, values)
-    predictors = {
-        "zero": Predictor.zero(len(weights)),
-        "none": Predictor.without_judge(weights, strength=settings["strength"]),
-        "trusted": Predictor.fixed(mean),
-        "judge": Predictor.from_judge(grade_probs, values, weights, strength=settings["strength"]),
-    }
+    setup, mean = method_setup(weights, grade_probs, values, settings)
     out = {}
-    for name, (scheme, kind) in METHODS.items():
-        probs = sampling_probabilities(
-            weights,
-            spread if scheme == "active" else None,
-            mix=settings["mix"],
-            uniform=scheme == "uniform",
-        )
+    for name, (probs, predictor) in setup.items():
         labels, wrong = [], 0
         for _ in range(reps):
             order = labeling_order(probs, rng)
@@ -138,7 +147,7 @@ def study_pair(weights, truth, grade_probs, values, settings, rng):
                 probs,
                 order,
                 truth[order],
-                predictors[kind],
+                predictor,
                 max_drop=settings["max_drop"],
                 alpha=settings["alpha"],
             )

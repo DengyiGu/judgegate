@@ -85,10 +85,25 @@ sampling/label assumptions. This is not a guarantee across many gates simultaneo
 `gate_path` checks every label; `run_gate` buys batches and may therefore buy extra labels.
 A label budget can return `undecided`. Identical runs pass without labels.
 
-`bounds` inverts a contiguous prefix/suffix of rejected thresholds on a fixed grid, then
-intersects with the certain range. Each one-sided bound has confidence 1-alpha, jointly at
-least 1-2*alpha. Grid resolution can make the bounds conservative. A gate can cross its exact
-threshold even when the printed grid bound does not cross it.
+`bounds` reports a one-sided lower and upper bound, each with confidence 1-alpha and jointly
+at least 1-2*alpha, intersected with the certain range.
+
+Called on its own it tests each value of a fixed grid with that value's own bets and reports
+the edge of the unbroken run of rejected values. Bets tuned per value do not make wealth
+monotone in the value, so a bound has to stop at the first gap; taking the farthest rejected
+value instead would pool many tests and lose the level.
+
+`run_gate` passes the gate threshold m, and the bounds are then anchored there. For values c
+on the far side of m (below it for the lower bound) the test reuses the bets the gate placed
+at m: `prod_s (1 + b_pass(s) * (y_s - c))`. Each factor is at least the gate's own factor, so
+wealth stays nonnegative, and it is decreasing in c. The established values form an interval
+whose edge is found by bisection, and that interval contains m exactly when the gate has
+crossed. If the true delta is below m, a lower bound above delta implies the single test at
+c = delta crossed, which has probability at most alpha. Only after the gate has crossed are
+values beyond m examined on the grid; an error there needs delta >= m and a crossing at the
+first grid value past delta, again one fixed test. The upper bound is symmetric. A pass
+therefore always reports `low >= m` and a fail `high <= m`. The price is that the bound on
+the side the evidence points away from uses bets that were mostly zero and can stay wide.
 
 ## Scope and evidence
 
@@ -105,11 +120,28 @@ checks, not proofs. The implementation and first study are exploratory research 
 
 ## Related work
 
-Prediction-powered retrieval evaluation and betting inference already exist. This project
-implements their ingredients around a concrete regression decision, with pair-specific
-weights, finite-population sampling and online recalibration. It makes no novelty claim.
+Every ingredient here has a published source.
 
-- [Oosterhuis et al., Reliable Confidence Intervals for Information Retrieval Evaluation
+- Judging only the documents that separate two systems: Carterette, Allan and Sitaraman,
+  Minimal test collections for retrieval evaluation, SIGIR 2006.
+- Importance sampling of judgments tuned to the difference between two rankers: Schnabel,
+  Swaminathan, Frazier and Joachims, Unbiased comparative evaluation of ranking functions,
+  ICTIR 2016.
+- Correcting model predictions with a small labeled sample:
+  [Angelopoulos et al., Prediction-powered inference](https://arxiv.org/abs/2301.09633);
+  applied to retrieval metrics with LLM labels by
+  [Oosterhuis et al., Reliable Confidence Intervals for Information Retrieval Evaluation
   Using Generative A.I, KDD 2024](https://arxiv.org/abs/2407.02464).
-- [Waudby-Smith and Ramdas, Estimating means of bounded random variables by betting](https://arxiv.org/abs/2010.09686).
-- [Angelopoulos et al., Prediction-powered inference](https://arxiv.org/abs/2301.09633).
+- Choosing which items to label from model uncertainty:
+  [Zrnic and Candes, Active statistical inference, ICML 2024](https://arxiv.org/abs/2403.03208).
+- Anytime-valid tests by betting:
+  [Waudby-Smith and Ramdas, Estimating means of bounded random variables by betting](https://arxiv.org/abs/2010.09686).
+
+What this project adds is the assembly around one decision, whether a candidate lost more
+than a budget on a fixed test set: exact item weights of the paired difference, successive
+sampling without replacement so that labeled items count exactly and the estimate ends at
+the true value, predictions refitted from the labels the gate has already bought, and a
+test whose bets use the known shrinking range of the next value. A literature search did
+not find this combination as an existing method, but the search was not exhaustive and the
+claim is no stronger than that. The measured benefit of each part is in the first-results
+report, including the parts that did not help.

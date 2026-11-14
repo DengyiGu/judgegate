@@ -64,10 +64,14 @@ kappa particularly uninformative about distinguishing relevant from irrelevant d
 The many unjudged pairs scored as zero explain part of the discrepancy with the LLM.
 
 Across the four blocks, mean observed wrong-decision fractions for the recalibrated
-weighted judge are 0.29-1.05%. Individual comparison fractions reach 10% at only 50 orders;
-this is not evidence that every comparison empirically falls below alpha. Neither aggregate
-nor worst-test rates prove or refute the sampling guarantee at this simulation size.
-The method's conditional-expectation and supermartingale arguments are given separately
+weighted judge are 0.29-1.05%. Fifty orders cannot separate a 3% rate from a 7% one, and
+20 of the 1,008 comparison-method cells showed more than 5%, up to 10%. Each of those 20
+was repeated with 500 fresh labeling orders (`python -m experiments.recheck`). Their rates
+came out between 0.6% and 3.6%, each with a standard error of at most 0.83 percentage
+points; [error-recheck.json](error-recheck.json) lists every cell. The cells were chosen
+for looking bad, so their 50-order rates were biased upward and the fresh ones are not.
+This checks the flagged cells only. It is consistent with the guarantee and does not prove
+it. The method's conditional-expectation and supermartingale arguments are given separately
 in [METHOD.md](../METHOD.md), with exact-expectation and synthetic error checks in tests.
 
 ## Resources and traceability

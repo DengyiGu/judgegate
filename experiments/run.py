@@ -1,4 +1,4 @@
-"""Run every stage: retrieval runs, LLM judgments, the simulation study and the tables.
+"""Run every stage: retrieval runs, LLM judgments, the simulation study, tables and recheck.
 
 Finished stages are skipped, so the command can be repeated after an interruption.
 """
@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import argparse
 
-from . import build_runs, evidence, run_judge, simulate, tables
+from . import build_runs, evidence, recheck, run_judge, simulate, tables
 
 
 def main():
@@ -20,6 +20,7 @@ def main():
     run_judge.main(shared)
     simulate.main([])
     tables.main([])
+    recheck.main([])
     evidence.main()
 
 
